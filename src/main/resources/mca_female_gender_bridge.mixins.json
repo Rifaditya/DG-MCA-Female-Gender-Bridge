@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.dasik.mcagenderbridge.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [],
+  "client": [
+    "PlayerEntityExtendedModelMixin",
+    "VillagerEntityBaseModelMCAMixin",
+    "VillagerLikeEntityMCARendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

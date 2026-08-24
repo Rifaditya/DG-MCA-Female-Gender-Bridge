@@ -1,0 +1,33 @@
+# gradle
+.gradle/
+build/
+out/
+classes/
+bin/
+
+# idea / vscode / eclipse
+.idea/
+*.iml
+*.ipr
+*.iws
+.settings/
+.vscode/
+.classpath
+.project
+
+# fabric / run
+run/
+
+# logs
+*.log
+*.log.*
+build_log*.txt
+
+# jars & archives
+*.jar
+Archive/
+Archive Jar of all versions/
+
+# Marketing & Hype
+Doc/Marketing/
+*hype_*
