@@ -31,3 +31,7 @@ Archive Jar of all versions/
 # Marketing & Hype
 Doc/Marketing/
 *hype_*
+
+# Platform Publisher API Token Security Vault
+*platform_tokens.json
+.agents/config/platform_tokens.json

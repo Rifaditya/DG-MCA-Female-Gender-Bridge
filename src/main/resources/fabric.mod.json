@@ -1,33 +1,41 @@
 {
-  "schemaVersion": 1,
-  "id": "mca_female_gender_bridge",
-  "version": "${version}",
-  "name": "MCA Female Gender Bridge",
-  "description": "Standalone 3D breast mesh renderer, breast genetics, and real-time movement physics engine for MCA villagers.",
-  "authors": [
-    "Dasik (Rifaditya)"
-  ],
-  "contact": {
-    "sources": "https://github.com/dasik/mca-female-gender-bridge"
-  },
-  "license": "GPL-3.0-only",
-  "icon": "assets/mca_female_gender_bridge/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "com.dasik.mcagenderbridge.McaFemaleGenderBridge"
+    "schemaVersion": 1,
+    "id": "mca_female_gender_bridge",
+    "version": "${version}",
+    "name": "MCA Female Gender Bridge",
+    "description": "Standalone 3D breast mesh renderer, breast genetics, and real-time movement physics engine for MCA villagers.",
+    "authors": [
+        "Dasik (Rifaditya)"
     ],
-    "client": [
-      "com.dasik.mcagenderbridge.client.McaFemaleGenderBridgeClient"
-    ]
-  },
-  "mixins": [
-    "mca_female_gender_bridge.mixins.json"
-  ],
-  "depends": {
-    "fabricloader": ">=0.16.0",
-    "minecraft": ">=26.2-",
-    "fabric-api": "*",
-    "mca": ">=8.0.0"
-  }
+    "contact": {
+        "sources": "https://github.com/dasik/mca-female-gender-bridge"
+    },
+    "license": "GPL-3.0-only",
+    "icon": "assets/mca_female_gender_bridge/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.dasik.mcagenderbridge.McaFemaleGenderBridge"
+        ],
+        "client": [
+            "com.dasik.mcagenderbridge.client.McaFemaleGenderBridgeClient"
+        ]
+    },
+    "mixins": [
+        "mca_female_gender_bridge.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.16.0",
+        "minecraft": ">=26.2-",
+        "fabric-api": "*",
+        "mca": ">=8.0.0"
+    },
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.donate": "https://ko-fi.com/dasikigaijin",
+                "modmenu.kofi": "https://ko-fi.com/dasikigaijin"
+            }
+        }
+    }
 }
