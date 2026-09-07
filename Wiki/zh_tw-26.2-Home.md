@@ -1,0 +1,35 @@
+# MCA Female Gender Bridge (MC 26.2)
+
+🌐 **Languages**: [[🇺🇸 English|Home]] | [[🇨🇳 简体中文|zh_cn-Home]] | [[🇭🇰 繁體中文|zh_tw-Home]] | [[🇷🇺 Русский|ru_ru-Home]] | [[🇪🇸 Español|es_es-Home]] | [[🇩🇪 Deutsch|de_de-Home]] | [[🇫🇷 Français|fr_fr-Home]] | [[🇧🇷 Português|pt_br-Home]] | [[🇯🇵 日本語|ja_jp-Home]] | [[🇮🇩 Bahasa Indonesia|id_id-Home]] | [[🇰🇷 한국어|ko_kr-Home]]
+
+> 📌 **代碼倉庫原始碼免責聲明**：本維基文件反映了**倉庫當前的原始碼狀態**，可能包含領先於 CurseForge 與 Modrinth 上公開發布版本的最新開發提交或未發布功能。
+
+---
+
+## 📦 Documentation Portal (Minecraft 26.2)
+
+Welcome to the sovereign technical documentation for **MCA Female Gender Bridge** on **Minecraft 26.2**.
+
+---
+
+## 📚 Feature & Subsystem Matrix
+
+| Subsystem | Wiki Guide Link | Core Mechanics & Architecture |
+| :--- | :--- | :--- |
+| **Genetics Bridge** | [[Genetics Bridge & Trait Inheritance|zh_tw-26.2-Genetics-Bridge-and-Trait-Inheritance]] | Allele crossover, Gaussian mutation variance ($\pm 7.5\%$), dynamic mesh scaling |
+| **Physics Engine** | [[Spring-Damper Physics Engine|zh_tw-26.2-Spring-Damper-Physics-Engine]] | Damped harmonic oscillator ($k=0.25, c=0.75$), zero-allocation concurrent cache |
+| **Model Geometry** | [[Model Geometry & Render Layers|zh_tw-26.2-Model-Geometry-and-Render-Layers]] | 64x64 UV-mapped standalone cuboid box, `McaBreastRenderLayer`, skin projection |
+| **Architecture & Mixins** | [[Architecture & Mixins|zh_tw-26.2-Architecture-and-Mixins]] | Bytecode mesh suppression, classloader safety gate, clean separation |
+| **Developer Guide** | [[Build & Developer Setup|zh_tw-26.2-Developer-Setup-and-Building]] | JDK 25 toolchains, stub compilation architecture, Loom setup |
+
+---
+
+> ☕ *獨立開發者寄語*：如果你喜歡原生獨立的村民女性物理與三維網格表現，歡迎在 [Ko-fi](https://ko-fi.com/dasikigaijin) 上支持我的獨立開發！
+
+---
+
+## 🔙 Navigation
+
+- [[Back to Central Portal|zh_tw-Home]]
+- [[Version Compatibility Guide|zh_tw-Version-Compatibility]]
+- [[Troubleshooting & FAQ|zh_tw-Troubleshooting-and-FAQ]]

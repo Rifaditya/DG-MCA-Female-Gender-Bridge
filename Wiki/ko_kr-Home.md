@@ -2,35 +2,63 @@
 
 🌐 **Languages**: [[🇺🇸 English|Home]] | [[🇨🇳 简体中文|zh_cn-Home]] | [[🇭🇰 繁體中文|zh_tw-Home]] | [[🇷🇺 Русский|ru_ru-Home]] | [[🇪🇸 Español|es_es-Home]] | [[🇩🇪 Deutsch|de_de-Home]] | [[🇫🇷 Français|fr_fr-Home]] | [[🇧🇷 Português|pt_br-Home]] | [[🇯🇵 日本語|ja_jp-Home]] | [[🇮🇩 Bahasa Indonesia|id_id-Home]] | [[🇰🇷 한국어|ko_kr-Home]]
 
-> 📌 **Repository Source Disclaimer**: The documentation in this Wiki reflects the **current source code state in the repository**, which may include recent unreleased commits or developmental features ahead of public release builds on CurseForge and Modrinth.
+> 📌 **저장소 소스 코드 면책 조항**: 본 위키 문서는 **저장소의 현재 소스 코드 상태**를 반영하며, CurseForge 및 Modrinth의 공개 릴리스 빌드보다 앞선 미출시 커밋이나 개발 중인 기능을 포함할 수 있습니다.
 
-## 🇰🇷 한국어 (Korean)
+## 개요 및 아키텍처
 
-MCA Female Gender Bridge는 Minecraft Comes Alive (MCA Reborn) 주민을 위한 고성능 독립 3D 가슴 메시 렌더러, 유전적 형질 상속 브리지, 그리고 실시간 스프링-댐퍼 물리 엔진입니다.
+**MCA Female Gender Bridge**는 Minecraft Comes Alive (MCA Reborn) 여성 주민을 위해 독립형 3D 메시 렌더러, 동적 형질 유전 브리지, 실시간 스프링-댐퍼 운동 물리 엔진을 제공하는 고급 패브릭 모드입니다.
+
+버전 1.3.0부터 외부 모드 의존성을 전면 배제하고 자체 모델 지오메트리와 질량-스프링 물리 솔버를 내장하여 완전한 단독 아키텍처로 동작합니다.
+
+```
++------------------------------------------------------------------------------------+
+|                                MINECRAFT CLIENT                                    |
+|                                                                                    |
+|   +--------------------------+                  +------------------------------+   |
+|   |   MCA Reborn Villagers   |                  |   MCA Female Gender Bridge   |   |
+|   |  - Chromosome Genetics   |                  |  - Standalone 3D Model Box   |   |
+|   |  - Visuals & Phenotypes  |                  |  - Spring-Damper Physics     |   |
+|   |  - VillagerRenderState   |                  |  - McaBreastRenderLayer      |   |
+|   +------------+-------------+                  +--------------+---------------+   |
+|                |                                               |                   |
+|                v                                               v                   |
+|   [VillagerVisuals Snapshot] ---------------------> [Dynamic Mesh Scaling]         |
+|   (breastSize, skin, female)                         (0.7f + breastSize * 0.5f)    |
+|                                                                |                   |
+|                                                                v                   |
+|   [Suppress Static MCA Breasts] <----------------- [Mojang SubmitNodeCollector]    |
+|   (PlayerEntityExtendedModelMixin)                  (RenderTypes.entityCutout)     |
+|   (VillagerEntityBaseModelMCAMixin)                                                |
++------------------------------------------------------------------------------------+
+```
 
 ---
 
-## 아키텍처 핵심 요약
+## 마인크래프트 버전 선택 포털
 
-- **독립형 3D 모델 지오메트리**: 주민 몸체에 완벽히 정렬되는 64x64 UV 매핑 큐보이드 메시 (`McaBreastModelBox`).
-- **무할당(Zero-Allocation) 물리 엔진**: `ConcurrentHashMap` 기반의 GC 부하 없는 감쇠 조화 진동자 (`McaBreastPhysicsEngine`).
-- **유전 형질 상속**: 자연스러운 변이폭(±7.5%)을 포함한 모계 유전 전달 시스템 (`GeneticsBridge`).
-- **바이트코드 메시 억제**: 중복 메시 렌더링을 방지하기 위한 MCA 기본 정적 가슴 메시 비활성화 Mixin.
-
----
-
-## 마인크래프트 버전 선택
-
-| Minecraft | Mod Release | Wiki Link |
-| :--- | :--- | :--- |
-| **Minecraft 26.2** | `1.3.1+26.2` | [[👉 MC 26.2 Portal|26.2-Home]] |
-| **Minecraft 26.3** | `1.3.1+26.3` | [[👉 MC 26.3 Portal|26.3-Home]] |
+| Minecraft Version | Mod Release | Fabric Loader | Fabric API | Java Toolchain | Documentation Portal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Minecraft 26.2** | `1.3.1+26.2` | `>=0.16.0` | `0.152.1+26.2` | JDK 25 (Loom 1.15.2) | [[👉 Enter MC 26.2 Wiki|ko_kr-26.2-Home]] |
+| **Minecraft 26.3** | `1.3.1+26.3` | `>=0.19.3` | `0.156.1+26.3` | JDK 25 (Loom 1.15.2) | [[👉 Enter MC 26.3 Wiki|ko_kr-26.3-Home]] |
 
 ---
 
-## 🧭 Navigation
-- [[메인 포털로 돌아가기|Home]]
-- [[개요 및 아키텍처|ko_kr-Overview]]
-- [[버전 호환성 매트릭스|Version-Compatibility]]
-- [[문제 해결 및 FAQ|Troubleshooting-and-FAQ]]
-- [[개발자 환경 및 빌드 가이드|Developer-Setup-and-Building]]
+## 핵심 엔지니어링 기둥
+
+1. **Standalone 3D Model Geometry**: Custom 64x64 UV-mapped cuboid mesh (`McaBreastModelBox`).
+2. **Zero-Allocation Spring-Damper Physics**: Tick-level damped harmonic oscillator (`McaBreastPhysicsEngine`).
+3. **Genetic Trait Inheritance**: Biological trait inheritance bridge (`GeneticsBridge`) with Gaussian variance ($\pm 7.5\%$).
+4. **Bytecode Mesh Suppression**: Clean Mixin injections suppressing legacy static breast geometry.
+5. **Pre-Release Version Guard**: Robust runtime diagnostic classloader safety gate (`ModVersionGuard`).
+
+---
+
+> ☕ *1인 개발자 노트*: 여성 주민을 위한 독립형 3D 지오메트리와 동적 물리 엔진이 마음에 드셨다면, [Ko-fi](https://ko-fi.com/dasikigaijin)에서 개발을 응원해 주세요!
+
+---
+
+## 글로벌 문서 내비게이션
+
+- [[Version Compatibility Matrix|ko_kr-Version-Compatibility]]
+- [[Troubleshooting & FAQ|ko_kr-Troubleshooting-and-FAQ]]
+- [[Developer Setup & Building|ko_kr-Developer-Setup-and-Building]]

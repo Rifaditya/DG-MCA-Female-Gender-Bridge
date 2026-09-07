@@ -38,3 +38,8 @@ Doc/Marketing/
 
 # GitHub Wiki local repo clone
 .wiki/
+
+# OS
+desktop.ini
+**/desktop.ini
+

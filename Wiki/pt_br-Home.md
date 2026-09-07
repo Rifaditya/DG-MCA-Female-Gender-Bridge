@@ -1,36 +1,64 @@
-# Portal de Documentação do MCA Female Gender Bridge
+# Portal de Documentação MCA Female Gender Bridge
 
 🌐 **Languages**: [[🇺🇸 English|Home]] | [[🇨🇳 简体中文|zh_cn-Home]] | [[🇭🇰 繁體中文|zh_tw-Home]] | [[🇷🇺 Русский|ru_ru-Home]] | [[🇪🇸 Español|es_es-Home]] | [[🇩🇪 Deutsch|de_de-Home]] | [[🇫🇷 Français|fr_fr-Home]] | [[🇧🇷 Português|pt_br-Home]] | [[🇯🇵 日本語|ja_jp-Home]] | [[🇮🇩 Bahasa Indonesia|id_id-Home]] | [[🇰🇷 한국어|ko_kr-Home]]
 
-> 📌 **Repository Source Disclaimer**: The documentation in this Wiki reflects the **current source code state in the repository**, which may include recent unreleased commits or developmental features ahead of public release builds on CurseForge and Modrinth.
+> 📌 **Aviso sobre o Código-Fonte do Repositório**: A documentação desta Wiki reflete o **estado atual do código-fonte no repositório**, podendo incluir commits recentes ou recursos em desenvolvimento não lançados no CurseForge ou Modrinth.
 
-## 🇧🇷 Português (Portuguese)
+## Visão Geral e Arquitetura
 
-MCA Female Gender Bridge é um renderizador 3D autônomo, ponte de herança genética e motor de física de movimento com mola e amortecimento em tempo real para aldeões do Minecraft Comes Alive (MCA Reborn).
+**MCA Female Gender Bridge** é um mod Fabric avançado que oferece renderização de malha 3D independente, ponte de herança genética e motor físico de mola-amortecedor em tempo real para aldeãs de Minecraft Comes Alive (MCA Reborn).
+
+A partir da versão 1.3.0, o mod tornou-se 100% autônomo, incorporando sua própria geometria e cálculo cinemático sem dependências extras.
+
+```
++------------------------------------------------------------------------------------+
+|                                MINECRAFT CLIENT                                    |
+|                                                                                    |
+|   +--------------------------+                  +------------------------------+   |
+|   |   MCA Reborn Villagers   |                  |   MCA Female Gender Bridge   |   |
+|   |  - Chromosome Genetics   |                  |  - Standalone 3D Model Box   |   |
+|   |  - Visuals & Phenotypes  |                  |  - Spring-Damper Physics     |   |
+|   |  - VillagerRenderState   |                  |  - McaBreastRenderLayer      |   |
+|   +------------+-------------+                  +--------------+---------------+   |
+|                |                                               |                   |
+|                v                                               v                   |
+|   [VillagerVisuals Snapshot] ---------------------> [Dynamic Mesh Scaling]         |
+|   (breastSize, skin, female)                         (0.7f + breastSize * 0.5f)    |
+|                                                                |                   |
+|                                                                v                   |
+|   [Suppress Static MCA Breasts] <----------------- [Mojang SubmitNodeCollector]    |
+|   (PlayerEntityExtendedModelMixin)                  (RenderTypes.entityCutout)     |
+|   (VillagerEntityBaseModelMCAMixin)                                                |
++------------------------------------------------------------------------------------+
+```
 
 ---
 
-## Pilares Arquiteturais
+## Seletor de Versões do Minecraft
 
-- **Geometria 3D Autônoma**: Modelo customizado em 64x64 UV (`McaBreastModelBox`) ancorado no tronco do aldeão com textura de pele.
-- **Física Zero-Allocation**: Oscilador harmônico amortecido (`McaBreastPhysicsEngine`) utilizando `ConcurrentHashMap` sem sobrecarga de GC.
-- **Herança Genética**: Transmissão mãe-filha (`GeneticsBridge`) com variação de mutação de ±7,5%.
-- **Supressão de Malha Bytecode**: Injeções Mixin para ocultar os seios estáticos padrão do MCA.
-
----
-
-## Seletor de Versão
-
-| Minecraft | Mod Release | Wiki Link |
-| :--- | :--- | :--- |
-| **Minecraft 26.2** | `1.3.1+26.2` | [[👉 MC 26.2 Portal|26.2-Home]] |
-| **Minecraft 26.3** | `1.3.1+26.3` | [[👉 MC 26.3 Portal|26.3-Home]] |
+| Minecraft Version | Mod Release | Fabric Loader | Fabric API | Java Toolchain | Documentation Portal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Minecraft 26.2** | `1.3.1+26.2` | `>=0.16.0` | `0.152.1+26.2` | JDK 25 (Loom 1.15.2) | [[👉 Enter MC 26.2 Wiki|pt_br-26.2-Home]] |
+| **Minecraft 26.3** | `1.3.1+26.3` | `>=0.19.3` | `0.156.1+26.3` | JDK 25 (Loom 1.15.2) | [[👉 Enter MC 26.3 Wiki|pt_br-26.3-Home]] |
 
 ---
 
-## 🧭 Navigation
-- [[Portal Principal|Home]]
-- [[Visão Geral e Arquitetura|pt_br-Overview]]
-- [[Matriz de Compatibilidade|Version-Compatibility]]
-- [[Solução de Problemas|Troubleshooting-and-FAQ]]
-- [[Guia do Desenvolvedor|Developer-Setup-and-Building]]
+## Pilares Centrais de Engenharia
+
+1. **Standalone 3D Model Geometry**: Custom 64x64 UV-mapped cuboid mesh (`McaBreastModelBox`).
+2. **Zero-Allocation Spring-Damper Physics**: Tick-level damped harmonic oscillator (`McaBreastPhysicsEngine`).
+3. **Genetic Trait Inheritance**: Biological trait inheritance bridge (`GeneticsBridge`) with Gaussian variance ($\pm 7.5\%$).
+4. **Bytecode Mesh Suppression**: Clean Mixin injections suppressing legacy static breast geometry.
+5. **Pre-Release Version Guard**: Robust runtime diagnostic classloader safety gate (`ModVersionGuard`).
+
+---
+
+> ☕ *Nota do desenvolvedor*: Se você aprecia a física independente e a geometria 3D para aldeãs, apoie meu trabalho solo no [Ko-fi](https://ko-fi.com/dasikigaijin)!
+
+---
+
+## Navegação Global
+
+- [[Version Compatibility Matrix|pt_br-Version-Compatibility]]
+- [[Troubleshooting & FAQ|pt_br-Troubleshooting-and-FAQ]]
+- [[Developer Setup & Building|pt_br-Developer-Setup-and-Building]]
