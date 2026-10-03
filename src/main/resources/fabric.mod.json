@@ -37,6 +37,10 @@
                 "modmenu.donate": "https://ko-fi.com/dasikigaijin",
                 "modmenu.kofi": "https://ko-fi.com/dasikigaijin"
             }
+        },
+        "modrinth": {
+            "projectId": "mca-female-gender-bridge",
+            "slug": "mca-female-gender-bridge"
         }
     }
 }
